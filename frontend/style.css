@@ -1,0 +1,251 @@
+/* --- Global Styles --- */
+:root {
+    --primary-color: #EF5350; /* Pokemon Red */
+    --secondary-color: #424242; /* Dark Gray */
+    --background-color: #f5f5f5;
+    --card-background: #ffffff;
+    --text-color: #212121;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Login Page Styles --- */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.button {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: #d32f2f; /* Darker Red */
+}
+
+.button-secondary {
+    background-color: var(--secondary-color);
+}
+.button-secondary:hover {
+    background-color: #212121;
+}
+
+.error-message {
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 1rem;
+    height: 1em; /* Reserve space */
+}
+
+.form-hint {
+    font-size: 0.875rem;
+    color: #757575;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* --- App Page Styles --- */
+.app-body {
+    padding-bottom: 100px; /* Space for the fixed footer */
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--card-background);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.app-header h1 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.app-header .button {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+}
+
+/* Grid for Pokemon Cards */
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Pokemon Card Style */
+.pokemon-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-card img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+    image-rendering: pixelated; /* Sharp pixels for sprite art */
+}
+
+.pokemon-card .name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+}
+
+.pokemon-card .type {
+    font-size: 0.9rem;
+    color: #757575;
+    text-transform: capitalize;
+}
+
+/* --- New History Card Style --- */
+.history-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.history-card .term {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.history-card .timestamp {
+    font-size: 0.9rem;
+    color: #757575;
+}
+
+
+/* Footer Search Bar */
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-background);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.search-bar {
+    display: flex;
+    max-width: 700px;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    padding: 0.85rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.search-bar .button {
+    width: auto;
+    padding: 0.85rem 1.5rem;
+}
+
+/* Loader */
+.loader {
+    border: 5px solid #f3f3ff;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+

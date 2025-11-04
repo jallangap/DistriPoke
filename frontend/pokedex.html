@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Pokedex</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="app-body">
+
+    <header class="app-header">
+        <h1>Distributed Pokedex</h1>
+        <button id="show-all-btn" class="button button-secondary">Show All</button>
+    </header>
+
+    <!-- Main container for Pokemon cards or history -->
+    <main id="pokemon-container" class="pokemon-grid">
+        <!-- Content will be injected here by pokedex.js -->
+        <div id="loader" class="loader"></div>
+    </main>
+
+    <!-- Search bar fixed at the bottom -->
+    <footer class="app-footer">
+        <form id="search-form" class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for a Pokemon (e.g., pikachu)">
+            <button type="submit" class="button">Search</button>
+            <!-- New History Button -->
+            <button type="button" id="history-btn" class="button button-secondary">History</button>
+        </form>
+    </footer>
+
+    <script src="pokedex.js"></script>
+</body>
+</html>
+
