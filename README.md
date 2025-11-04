@@ -1,75 +1,63 @@
-Pokedex Distributed Project
+Pokedex Distributed Project (DistriPoke)
 
-This project is a simple distributed application created for educational purposes. It consists of a vanilla JavaScript frontend and a Node.js/Express/SQLite backend.
+This project is a simple distributed application consisting of a Node.js/Express backend, a vanilla JavaScript frontend, and a persistent SQLite database for storing search history.
 
-How to Run
+It is designed to run locally using Docker Compose and is ready to be deployed to platforms like Render.
 
-You will need two terminal windows for this.
+1. Project Stack
 
-Terminal 1: Run the Backend
+Frontend (Containerized by Nginx): HTML, CSS (Tailwind classes), and Vanilla JavaScript.
 
-Navigate to the backend directory:
+Backend (Containerized by Node.js): Node.js, Express, and SQLite3 (for search history).
 
-cd backend
+Database: SQLite (file-based).
 
+2. How to Run Locally (Using Docker Compose)
 
-Install the dependencies:
+The entire application runs using one single command, thanks to the provided docker-compose.yml.
 
-npm install
+Prerequisites
 
+You must have Docker Desktop installed and running on your system.
 
-Start the backend server:
+Steps
 
-npm start
+Open your terminal in the root directory of the project (where docker-compose.yml is located).
 
+Build and Run: Execute the following command. This builds the images, installs the backend dependencies (inside the Linux container), and starts both services:
 
-The server will start on http://localhost:3000. It will also create a pokedex.db file in this directory to store the search history.
-
-Terminal 2: Run the Frontend
-
-The frontend is just static files (HTML, CSS, JS). You need a simple web server to run it. The easiest way is to use the serve package or a VS Code extension.
-
-Method A: Using serve (Recommended)
-
-Install serve globally (if you don't have it):
-
-npm install -g serve
+docker-compose up
 
 
-Navigate to the frontend directory:
+Access the Application: Once the terminal logs show "Backend server running on http://localhost:3000" and the Nginx server is ready, open your web browser and go to:
 
-cd frontend
-
-
-Serve the files (the -l 5000 part runs it on port 5000, but any port other than 3000 is fine):
-
-serve -l 5000
+http://localhost
 
 
-Open your browser and go to http://localhost:5000.
+Stop the Project: Press Ctrl + C in the terminal and run docker-compose down to stop and remove the running containers.
 
-Method B: Using VS Code Live Server Extension
+3. How to Use the App
 
-Install the "Live Server" extension from the VS Code marketplace.
+Login: Use the default credentials: User: admin / Password: 12345.
 
-In VS Code, open the frontend folder.
+Functionality:
 
-Right-click on index.html and select "Open with Live Server".
+The home screen loads the first 151 Pokémon initially.
 
-This will automatically open your browser to the correct page.
+Use the search bar to look up Pokémon by name (e.g., pikachu).
 
-How to Use
+Every successful search is saved to the database.
 
-Open the application in your browser (e.g., http://localhost:5000).
+Click the "History" button to view a list of all successful searches saved in the SQLite database.
 
-You will see the login page.
+Click the "Show All" button to refresh the main list.
 
-Enter admin as the user and 12345 as the password.
+4. Deployment to Render (Next Steps)
 
-You will be redirected to the Pokedex, which will load the first 151 Pokemon.
+This project is configured to be deployed as two separate services on Render:
 
-Use the search bar at the bottom to find a specific Pokemon by name (e.g., pikachu, charizard).
+Pokedex-API (Web Service): Deployed from the backend folder.
 
-Every search you make will be saved in the pokedex.db file on the backend.
+Pokedex-App (Static Site): Deployed from the frontend folder.
 
-Click "Show All" to return to the full list.
+Note: Before deploying the Static Site, remember to update the BACKEND_URL in frontend/login.js and frontend/pokedex.js with the public URL assigned by Render to your Pokedex-API service.
