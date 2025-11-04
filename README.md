@@ -1,63 +1,51 @@
-Pokedex Distributed Project (DistriPoke)
+# DISTRIPO_KE (Distributed Pokedex Project)
 
-This project is a simple distributed application consisting of a Node.js/Express backend, a vanilla JavaScript frontend, and a persistent SQLite database for storing search history.
+This project implements a three-tier distributed architecture for an educational assignment, featuring a web frontend, a Node.js API backend, and a PostgreSQL database for persistent storage.
 
-It is designed to run locally using Docker Compose and is ready to be deployed to platforms like Render.
+## Project Structure
 
-1. Project Stack
+* **Frontend (`frontend/`):** Static files (HTML, CSS, Vanilla JavaScript) served by Nginx. Handles user interface, login logic, and calls the Backend API.
+* **Backend (`backend/`):** Node.js / Express API. Handles business logic, PokeAPI fetching, authentication, and database interaction using PostgreSQL.
+* **Database (`db` service):** PostgreSQL container used to store persistent search history.
 
-Frontend (Containerized by Nginx): HTML, CSS (Tailwind classes), and Vanilla JavaScript.
+## How to Run (Local Docker Setup)
 
-Backend (Containerized by Node.js): Node.js, Express, and SQLite3 (for search history).
+The entire application is managed by Docker Compose for easy local execution.
 
-Database: SQLite (file-based).
+### Prerequisites
 
-2. How to Run Locally (Using Docker Compose)
+You must have  **Docker Desktop** installed and running on your machine.
 
-The entire application runs using one single command, thanks to the provided docker-compose.yml.
+### Execution (One Command)
 
-Prerequisites
+1.  Open your terminal in the root directory of the project (where `docker-compose.yml` is located).
+2.  Execute the following command. The `--build` flag ensures that the images are correctly built with the necessary PostgreSQL dependencies.
 
-You must have Docker Desktop installed and running on your system.
+    ```bash
+    docker-compose up --build
+    ```
 
-Steps
+3.  The database will initialize, and the backend will wait 10 seconds to ensure the database is ready, preventing connection errors.
+4.  Open your web browser and navigate to:
 
-Open your terminal in the root directory of the project (where docker-compose.yml is located).
+    ```
+    http://localhost
+    ```
 
-Build and Run: Execute the following command. This builds the images, installs the backend dependencies (inside the Linux container), and starts both services:
+### Login Credentials
 
-docker-compose up
+| Role | Username | Password |
+| :--- | :--- | :--- |
+| **Admin** | `admin` | `12345` |
 
+### Functionality
 
-Access the Application: Once the terminal logs show "Backend server running on http://localhost:3000" and the Nginx server is ready, open your web browser and go to:
+* **Pokedex Display:** Shows the first 151 Pokémon upon successful login.
+* **Search:** Allows searching by Pokémon name (e.g., `pikachu`). Each successful search is logged to the PostgreSQL database.
+* **History:** The "History" button retrieves and displays the 20 most recent search queries from the PostgreSQL database, confirming persistence.
 
-http://localhost
+---
 
+## Final Step: Deployment to Render (Cloud)
 
-Stop the Project: Press Ctrl + C in the terminal and run docker-compose down to stop and remove the running containers.
-
-3. How to Use the App
-
-Login: Use the default credentials: User: admin / Password: 12345.
-
-Functionality:
-
-The home screen loads the first 151 Pokémon initially.
-
-Use the search bar to look up Pokémon by name (e.g., pikachu).
-
-Every successful search is saved to the database.
-
-Click the "History" button to view a list of all successful searches saved in the SQLite database.
-
-Click the "Show All" button to refresh the main list.
-
-4. Deployment to Render (Next Steps)
-
-This project is configured to be deployed as two separate services on Render:
-
-Pokedex-API (Web Service): Deployed from the backend folder.
-
-Pokedex-App (Static Site): Deployed from the frontend folder.
-
-Note: Before deploying the Static Site, remember to update the BACKEND_URL in frontend/login.js and frontend/pokedex.js with the public URL assigned by Render to your Pokedex-API service.
+To deploy this project to the cloud, all changes (including the PostgreSQL migration) must be pushed to GitHub before configuring the services in Render.

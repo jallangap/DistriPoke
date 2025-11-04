@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pokedexdb
 
   backend:
     build: ./backend
@@ -10,8 +18,14 @@ services:
     volumes:
 
       - ./backend:/app
-
+      
       - /app/node_modules
+    depends_on:
+      - db
+
+    command: bash -c "sleep 10 && node server.js"
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/pokedexdb
 
   frontend:
     build: ./frontend
@@ -19,3 +33,6 @@ services:
       - "80:80"
     depends_on:
       - backend
+
+volumes:
+  postgres_data:
